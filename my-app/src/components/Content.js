@@ -2,15 +2,33 @@ import React, { Component } from "react";
 import css from "./css/Content.module.css";
 import {savedPosts} from "../posts.json";
 import PostItem from "./PostItem";
+import Loader from "./Loader";
 
 export class Content extends Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            isLoggedIn: false
+        }
+        console.log('Constructor called')
     }
+
+    changeLoaded() {
+        setTimeout(() => { this.setState({ isLoggedIn: !this.state.isLoggedIn }) }, 2000);
+        console.log('Change state called')
+    }
+
+    componentDidMount() {
+        this.changeLoaded()
+        console.log('Component did mount')
+      }
     
     render() {
+        console.log('render method called')
         return (
             <div className={css.Content}>
+                
                 
                 <div className={css.TitleBar}>
                     <h1>My Photos</h1>
@@ -33,9 +51,12 @@ export class Content extends Component {
 
 
                     {/* Part 2: Creating a child component */}
-
-                    <PostItem savedPosts={savedPosts} />
+                   
                 </div>
+                { !this.state.isLoggedIn ? 
+                    <Loader />:
+                    <PostItem savedPosts={savedPosts} /> 
+                   }
             </div>
         )
     }

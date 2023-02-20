@@ -8,8 +8,7 @@ function App() {
   return (
     <div className={css.App}>
       {/* Add your components here */}
-      <NavBarForm />
-      <Sidebar />
+      
       <Content />
     </div>
   );
